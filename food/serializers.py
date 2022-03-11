@@ -1,25 +1,26 @@
-from pprint import pprint
-from rest_framework import serializers
-from .models import Food, UserFood
 
-class FoodSerializer(serializers.ModelSerializer):
+from rest_framework import serializers
+from .models import FoodStatic, FoodUser ,Users
+
+
+
+class UsersSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Food
+        model = Users
+        fields = ['id','phone','birth_date']
+
+
+class FoodStaticSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = FoodStatic
         fields = ['id','food','grams','calories']
 
+class FoodUserSerializer(serializers.ModelSerializer):
 
-class UserFoodSerializer(serializers.ModelSerializer):
-
-    food = FoodSerializer(many = True)
-    total_calories = serializers.SerializerMethodField()
-
-    def get_total_calories(self,user):
-        
-        return sum(food.calories for food in user.food.all())
-
-
-    
     class Meta:
-        model = UserFood
-        fields = ['id','user_id','phone','birth_date','food','total_calories']
+        model = FoodUser
+        fields = ['id','food','user']
+
+

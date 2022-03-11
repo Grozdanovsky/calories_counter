@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Food, UserFood
+from .models import  FoodStatic,  Users
 # Register your models here.
-@admin.register(Food)
+@admin.register(FoodStatic)
 class FoodAdmin(admin.ModelAdmin):
     list_display = ['food','calories','grams']
     ordering = ['calories']
 
-@admin.register(UserFood)
+@admin.register(Users)
 class UserFoodAmin(admin.ModelAdmin):
     list_display = ['user','phone','birth_date','get_foods']
 
